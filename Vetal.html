@@ -1,5 +1,15 @@
 <!--
- for making own draw functions? https://www.w3schools.com/graphics/canvas_coordinates.asp
+
+	    --VETAL--
+ -A multi-messenger skymap-
+
+Created by Elsa Forberger, Blake Gallay, and Haley James as part of the 2017 WIPAC Summer High School Internship program.
+
+Special thanks to fellow high school interns Marcus Graham and Emme Hannibal, as well as mentors Joshua Wood, David Schultz,
+Silvia Bravo, and Amanda Nothem.
+
+Vetal is under active development at github.com/_____.
+
 -->
 <!DOCTYPE html>
 <html>
@@ -13,7 +23,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name = "keywords" content = "IceCube Neutrino multi-messenger Astronomy cosmic ray rays resarch website skymap Fermi HAWC Vetal">
-<meta name="author" content= "Elsa Forberger, Haley James, Blake Gallay, Marcus Graham, Emme Hannibal">
+<meta name="author" content= "Elsa Forberger, Haley James, and Blake Gallay">
 <title>Vetal</title>
 <style>
 
@@ -73,7 +83,7 @@ multiple.normal {
 	color: 'black';
 }
   
-ul.ghost {
+ul.links {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -81,12 +91,12 @@ ul.ghost {
     background-color: #333;
 }
 
-li.ghost {
+li.links {
     float: left;
     
 }
 
-li.ghost a {
+li.links a {
     display: block;
     color: white;
     text-align: center;
@@ -97,7 +107,7 @@ li.ghost a {
 }
 
 /* Change the link color to #111 (black) on hover */
-li.ghost a:hover:not(.active) {
+li.links a:hover:not(.active) {
     background-color: #111;
     
 }
@@ -111,7 +121,7 @@ li.ghost a:hover:not(.active) {
     
 }
 
-li.ghost {
+li.links {
     border-right: 1px solid #bbb;
 }
 
@@ -203,37 +213,35 @@ li.ghost {
   	});
   	
   </script>
-  
+  <link rel="icon" href="https://pbs.twimg.com/profile_images/909795893364305920/4hagG1aM.jpg">
 </head>
 <body>
 
 <div>
-	<ul class="ghost">
-		  <li class="ghost" ><a href="http://icecube.wisc.edu/~eforberger/Vetal.html">Home</a></li>
- 		  <li class="ghost"><a class="active" href="http://icecube.wisc.edu/~eforberger/skymap_about.html"><font color="black">About</font></a></li>
+	<ul class="links">
+		  <li class="links" ><a href="http://icecube.wisc.edu/~eforberger/Vetal.html">Home</a></li>
+ 		  <li class="links"><a class="active" href="http://icecube.wisc.edu/~eforberger/skymap_about.html"><font color="black">About</font></a></li>
 	</ul>
 </div>
 
 
  <!-- START -->
  <h1><big><big>ν</big></big>etal:  <font size=5>   a Multi-Messenger Skymap </font></h1> 
- <button onclick="show_fermi_info()">Fermi Conversion Info</button>
+ <button onclick="show_fermi_info()">Fermi Conversion Info (temp. disabled)</button>
   <div id = "ferminfo" style="background-color: #CAEBF2; display: none; margin-top: 5px; position: fixed; margin-left: 50x; width: 250px; height: 280px; z-index: 5;">
   <h4 style="color: black; font-size: 15; margin-left: 10px;">Converting and Uploading Fermi LAT Files</h4>
   <h4 style="color: black; font-size: 15; margin-left: 10px;">Download conversion utility:</h4><a href="/~eforberger/Utilities/fits2txt.zip" download>
   <button >Download</button></a>
   <h4 style="color: black; font-size: 15; margin-left: 10px;">Run fits2txt.app, then open the file navigator and select a Fermi .FITS file. Once the file has been processed, fermidataformatted.txt can be found under /fits2txt.app/Contents/Resources.</h4>
 </div>
- <input type="file" id="myFile" name='myFile' multiple size="5" onchange="hideshow(false)">
- <label for="checkbox-1">IceCube</label>
-    <input type="checkbox" name="checkbox-1" id="neutrino" onchange="hideshow(false)">&nbsp;
-    <label for="checkbox-2">Fermi Events</label>
-    <input type="checkbox" name="checkbox-2" id="gamma_ray" onchange="hideshow(false)">&nbsp;
-    <label for="checkbox-3">Gamma Ray Sources</label>
-    <input type="checkbox" name="checkbox-3" id="source" onchange="hideshow(false)">&nbsp;
-    <label for="checkbox-4">Other</label>
-    <input type="checkbox" name="checkbox-4" id="other" onchange="hideshow(false)">&nbsp;
- <button onclick="hideshow(true)">Submit</button>
+<div id = "likelihood_plot" style="background-color: #CAEBF2; display: none; margin-top: 5px; position: fixed; margin-left: 50x; width: 250px; height: 280px; z-index: 5;">
+  <h4 style="color: black; font-size: 15; margin-left: 10px;">Converting and Uploading Fermi LAT Files</h4>
+  <h4 style="color: black; font-size: 15; margin-left: 10px;">Download conversion utility:</h4><a href="/~eforberger/Utilities/fits2txt.zip" download>
+  <button >Download</button></a>
+  <h4 style="color: black; font-size: 15; margin-left: 10px;">Run fits2txt.app, then open the file navigator and select a Fermi .FITS file. Once the file has been processed, fermidataformatted.txt can be found under /fits2txt.app/Contents/Resources.</h4>
+</div>
+ <input type="file" id="myFile" name='myFile' multiple size="5">
+ 
 	<label for="galactic">Galactic Coordinates</label>
 	<input type="radio" name="coord_type" id="galactic"  checked=true onchange="coordType()">&nbsp;&nbsp;
 	<label for="equatorial">Equatorial Coordinates</label>
@@ -241,6 +249,7 @@ li.ghost {
 
 <div class="tab">
 
+<hr style="height:4.2px; visibility:hidden;" />
 <button class="accordion" ">IceCube</button> 
 
 <div id="other_div" class="panel" ">
@@ -425,7 +434,10 @@ li.ghost {
 </div>
 <div style="width:100%;clear:both"></div>
 
+
 <br></br>
+
+
 <div>
 <label for="timebox">Toggle filtering by time</label>
   <input type="checkbox" name="timebox" id="timebox" onchange = "hideshow(false)"><br></br>
@@ -434,8 +446,22 @@ li.ghost {
   	<label for="year">Year</label>
   	<input type="text" name = "year" id="year" value="2017" style = 'width: 5%'>
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  <label for="month">Month</label>
-  	<input type="text" name = "month" id="month" value="Oct" style = 'width: 5%'>
+  Month
+  <select id="month">
+	<option value="Jan">January</option>
+	<option value="Feb">February</option>
+	<option value="Mar">March</option>
+	<option value="Apr">April</option>
+	<option value="May">May</option>
+	<option value="June">June</option>
+	<option value="July">July</option>
+	<option value="Aug">August</option>
+	<option value="Sept">September</option>
+	<option value="Oct">October</option>
+	<option value="Nov">November</option>
+	<option value="Dec">December</option>
+	</select>
+
   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   <label for="day">Day</label>
   	<input type="text" name = "day" id="day" value="28" style = 'width: 5%'>
@@ -453,7 +479,7 @@ li.ghost {
 
 <div>
 	
-	<form style="position:relative; left:900px; top:-20px; z-index:2" id="vampire">
+	<form style="position:relative; left:900px; top:-20px; z-index:2" id="set_margin">
 	Margin
 	
 	<input type="text" name = "margin" id="margin" value=31536000>
@@ -473,12 +499,34 @@ li.ghost {
 		<input type="checkbox" name="zoombox" id="zoombox">
 </div>
 <br>
- <u>When displaying neutrino data, click on the points to select events </u>
+
+<div id="selectioninfo_source">
+ <b>When displaying gamma-ray sources alongside neutrinos, click on the points to perform likelihood analysis. </b>
+ </div>
+
+<div id="selectioninfo_neutrino">
+  <b>When displaying neutrino data, click on the data points to select events. </b>
+  <br>
+  Only display events within selected neutrino error regions<input type='checkbox' id='onlyErr' onchange='hideshow(true)'>
+  Only show selected neutrinos:<input type='checkbox' id='filterNeutrinos' onchange='hideshow(true)'>
+  <br>
+  <br>
+</div>
+ 
+<div id="clearselection">
+<button type="button" onclick="clear_selection()">Clear Selections</button>
+</div>
+<div id="div_canvas">
 <br>
-Only display events within selected neutrino error regions<input type='checkbox' id='onlyErr'>
-Only show selected neutrinos:<input type='checkbox' id='filterNeutrinos'>
-Clear Selections<input type="button" onclick="clear_selection()"><!--ND!!-->
-<div id="werewolf">
+<div>
+<button type="button" onclick="hideshow(true)">Draw SkyMap</button>
+</div>
+
+
+<br>
+
+
+
 
 <script src="d3.v4.min.js"></script>
 <script src="d3-geo-projection.v2.min.js"></script>
@@ -487,18 +535,24 @@ Clear Selections<input type="button" onclick="clear_selection()"><!--ND!!-->
 <script src="astro.coordinates.js"></script>
 
 
-
 <script>
 var acc = document.getElementsByClassName("accordion");
 var i;
 var dataBinding;
-
+canGo = true;
+d3.selectAll("svg").remove();
 //changes color of moused over file in the file selectors
 selected_neutrino = 0;
 selected_events = [];
+selected_source = [];
+analysis_drawn = false;
 
 function clear_selection(){
 selected_events = [];
+selected_source = [];
+
+hideshow(true);
+
 }
 
 //changes color of the name in the file selector that the mouse is over
@@ -1413,8 +1467,8 @@ var dataContainer = d3.select(detachedContainer);
 	  var width = 1000,//960
 		  height = 500;
 		  d3.select('body').selectAll('canvas').remove(); 
-	  var canvas = d3.select("#werewolf")
-	    .append("canvas")
+	  var canvas = d3.select("#div_canvas")
+		.append("canvas")
 	    .attr("style", "outline: solid black;")
 		.attr("width", width)
 		.attr("height", height);
@@ -1468,6 +1522,8 @@ function zoomed() {
 }
 
 function drawPoints(){
+
+
 var drawPoint = false;
 	var data = [];
 	  d3_events_length = 0;
@@ -1536,39 +1592,88 @@ var drawPoint = false;
 		//info on data binding: http://alignedleft.com/tutorials/d3/binding-data
 	dataBinding = dataContainer.selectAll("custom.point")
     .data(data, function(d) { return d; });
-
+	
     //handle selecting neutrinos for the ability to only draw the points inside the error range of selected neutrinos
     d3.select('canvas').on("click", function (){
+		
 		var x = d3.mouse(this)[0];
 		var y = d3.mouse(this)[1];
+		console.log(canGo);
 		console.log('x: '+ x+',  y: '+ y);
 		var elements = dataContainer.selectAll("custom.point");
 		elements.each(function(d) {
-		console.log('here');
 			var node = d3.select(this);
 			var pointCoords = project([node.attr('ra'), node.attr('dec')]);
-			if (Math.abs(x-pointCoords[0]) < 5 && Math.abs(y-pointCoords[1]) < 5 && node.attr('kind') == 'neutrino'){
+			if (Math.abs(x-pointCoords[0]) < 5 && Math.abs(y-pointCoords[1]) < 5){
+				
+				if(canGo){ 
+					canGo = false;
+					setTimeout(function(){ canGo = true;}, 500);
+				
 				console.log('dec: '+ node.attr('dec')+' ra: '+ node.attr('ra'));
 				var selected = false
 				for(var i = 0;i < selected_events.length;i++){
 					if(selected_events[i] == node.attr('id')){
 						selected = true
-						var selectedindex = i;
+						var selectedindex = i;		
 					}
 				}
 				if(selected == false){
 					selected_events.push(node.attr('id'));
+					if(node.attr('kind') == 'neutrino'){
+					mydraw.circle({
+						coords: [node.attr('ra'), node.attr('dec')],
+						radius: 10,
+						wrap: true,
+						raw: true, 
+						fill: false,
+						stroke: true,
+						lineWidth: 2,
+						strokeStyle: 'red'
+					});
+					}
 				}
 				else{
 					selected_events.splice(selectedindex, 1);
+					if(node.attr('kind') == 'neutrino'){
+					mydraw.circle({
+						coords: [node.attr('ra'), node.attr('dec')],
+						radius: 10,
+						wrap: true,
+						raw: true, 
+						fill: false,
+						stroke: true,
+						lineWidth: 3,
+						strokeStyle: 'white'
+					});
+					}
 				}
-	
+				
+				if(node.attr('kind').includes('source')){
+					var old_source = selected_source;
+					selected_source = [parseFloat(node.attr('ra')), parseFloat(node.attr('dec'))];
+					if(old_source != selected_source){
+						analysis_drawn = true;
+						hideshow(true);
+					}
+					
+					mydraw.circle({
+						coords: [node.attr('ra'), node.attr('dec')],
+						radius: 7,
+						wrap: true,
+						raw: true, 
+						fill: false,
+						stroke: true,
+						lineWidth: 2,
+						strokeStyle: 'green'
+					});
 
+				}
+				}
 			}
 		});
-    
+		
 });
-
 /*
 		Here a nest is used to organize data.
 		info on nests: https://github.com/d3/d3-collection/blob/master/README.md#nest
@@ -1578,6 +1683,8 @@ var drawPoint = false;
     .key(function(d, i) { return d.kind; })
     .key(function(d, i) { return d.type; })
     .entries(data);
+	
+	var sortedData = d3.nest()
 
   
   //d3_events_length = 0;
@@ -1847,6 +1954,455 @@ function colorFinder(){
 		
 });//end of for each node loop (neutrino)
 
+var elements = dataContainer.selectAll("custom.point");
+var neutrinos_drawn = false;
+var sources_drawn = false;
+		elements.each(function(d) {
+			
+			var node = d3.select(this);
+			
+			if(node.attr('kind') == 'neutrino'){
+				neutrinos_drawn = true;
+			}else if(node.attr('kind') == 'source'){
+				sources_drawn = true;
+			}
+		})
+		
+var neutrino_info_html = document.getElementById("selectioninfo_neutrino");
+    if (neutrinos_drawn) {
+        neutrino_info_html.style.display = "block";
+    } else {
+        neutrino_info_html.style.display = "none";
+    }
+	
+var source_info_html = document.getElementById("selectioninfo_source");
+    if (sources_drawn && neutrinos_drawn) {
+        source_info_html.style.display = "block";
+    } else {
+        source_info_html.style.display = "none";
+    }
+	
+var clearselection_html = document.getElementById("clearselection");
+	if((sources_drawn && neutrinos_drawn) || neutrinos_drawn){
+		clearselection_html.style.display = "block";
+	}else{
+		clearselection_html.style.display = "none";
+	}
+
+if(selected_source[0] != null && neutrinos_drawn){ //performs likelihood analysis if a gamma-ray source is selected and neutrinos are being drawn
+
+mydraw.circle({
+						coords: [selected_source[0], selected_source[1]],
+						radius: 7,
+						wrap: true,
+						raw: true, 
+						fill: false,
+						stroke: true,
+						lineWidth: 2,
+						strokeStyle: 'green'
+					});
+
+d3.selectAll("svg").remove(); //removes all svg elements that persist from earlier runs
+
+	  var margin = {top: 50, right: 30, bottom: 50, left: 50}, //general dimensions for visualization graphs
+	  	width = 250 - 50,
+      	height = 250 - 40;
+		
+	  var x = d3.scaleLinear().range([0,width])     //scaling axes to the width/height of graphs given the bounds
+	  var y = d3.scaleLinear().range([height,0])
+	  
+	var svg = d3.select("body").append("svg")                                   //proximity visualization element
+    		.attr("width", width + 150 + margin.right)
+    		.attr("height", height + margin.top + margin.bottom + 50)
+  		.append("g")
+   	 		.attr("transform", "translate(" + 150 + "," + margin.top + ")");
+	$("svg").css({top:1100,left:125,position:'absolute'});
+	
+	var ts_ns_svg = d3.select("body").append("svg")                             //likelihood graph element
+    		.attr("width", width + 450 + margin.right)
+    		.attr("height", height + margin.top + margin.bottom)
+  		.append("g")
+   	 		.attr("transform", "translate(" + 450 + "," + margin.top + ")");
+	$("svg").css({top:1100,left:300,position:'absolute'});
+	
+	var ts_ns_svg2 = d3.select("body").append("svg")                            //analysis summary element
+    		.attr("width", width + 900 + margin.right)
+    		.attr("height", height + margin.top + margin.bottom)
+  		.append("g")
+   	 		.attr("transform", "translate(" + 750 + "," + margin.top + ")");
+	$("svg").css({top:1100,left:750,position:'absolute'});
+	
+	var analysis_summary =                                                        //text for analysis summary
+['These graphs visually represent the likelihood that the selected', 
+ 'gamma-ray source can be considered a source of neutrino events ',
+ 'in the selected dataset.                        ',
+ '',
+ 'The proximity graph shows surrounding neutrino events within a',
+ '20° x 20° square of the selected source.',
+ 'The angular error of the neutrino events is represented by a    ',
+ '2D Gaussian gradient.',
+ '',
+ 'The likelihood graph displays TS (test statistic), which is a quantification',
+ 'of the likelihood that ns neutrino events originated from the source,',
+ 'for ns values between 0 and 10. In calculating TS, spatial clustering of',
+ 'events, as well as their proximity to the source and the angular errors',
+ 'are taken into account. Generally, a TS ≥ 25 is considered significant.'
+ ];
+ 
+	ts_ns_svg2.append("text") //writes summary header text 
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(15,-5)")
+	  	.text("Analysis Summary")	
+		.attr('font-size','20')
+		.attr('font-weight', 'bold')
+		
+	for(var n = 0; n < analysis_summary.length; n++){ //writes summary body text
+	ts_ns_svg2.append("text")
+	  	.attr("text-anchor", "start")
+	  	.attr("transform", "translate(-65,".concat(String((n + 1) * 12)).concat(")"))
+	  	.text(analysis_summary[n])	
+		.attr('font-size','12')
+		}
+	
+	ts_ns_svg2.append("svg:image")
+.attr('x', 0)
+.attr('y', 140)
+.attr('width', 200)
+.attr('height', 100)
+.attr("xlink:href", "https://i.imgur.com/UKcHX3z.png")
+
+	ts_ns_svg2.append("svg:image")
+.attr('x', -5)
+.attr('y', 177)
+.attr('width', 200)
+.attr('height', 100)
+.attr("xlink:href", "https://i.imgur.com/7TUEasI.png")
+	
+	var svg_container_text = d3.select("body").append("svg") //Section header ('Source Analysis')
+    		.attr("width", 40)
+    		.attr("height", height + margin.top + margin.bottom)
+  		.append("g")
+   	 		.attr("transform", "translate(" + 25 + "," + margin.top + ")");
+	$("svg").css({top:1100,left:0,position:'absolute'});
+	
+	
+	
+	var ras = {'min': selected_source[0] - 10, 'max': selected_source[0] + 10} //sets bounds for proximity graph, 20 degrees x 20 degrees
+	var decs = {'min': selected_source[1] - 10, 'max': selected_source[1] + 10} //centered around the selected source
+	
+	x.domain([ras['min'], ras['max']]);
+	y.domain([decs['min'], decs['max']]);
+	
+	
+	
+	
+	// *****LIKELIHOOD ANALYSIS*****
+	
+	function sph_dot(th1, th2, phi1, phi2){
+		
+		return Math.sin(th1)*Math.sin(th2)*Math.cos(phi1-phi2) + Math.cos(th1)*Math.cos(th2);
+		
+	}	
+	
+	function event_angular_distribution(event){ //implementation of kent distribution
+	
+		var kappa = 1.0/(event.attr('err') * Math.PI/180)**2;
+		
+		var log_dist = Math.log(kappa) - Math.log(2*Math.PI) - kappa + kappa*sph_dot(Math.PI/2-parseFloat(event.attr('dec') * Math.PI/180), Math.PI/2 - (parseFloat(selected_source[1]) * Math.PI/180), parseFloat(event.attr('ra') * Math.PI/180), parseFloat(selected_source[0] * Math.PI/180));
+		
+		return Math.E ** log_dist;	
+	
+	}
+	
+	h_sum = 0.0;
+	function H(ns){
+	
+		h_sum = 0.0;
+		var N = 40
+		
+		var elements = dataContainer.selectAll("custom.point");
+		
+		elements.each(function(d) {
+			
+			if(d3.select(this).attr('type') == 'shower'){
+			h_sum += Math.log((ns/N)*event_angular_distribution(d3.select(this))+(1-(ns/N))/(4*Math.PI))
+			}
+		})
+		
+		return 2 * h_sum;
+
+	}
+	
+	function TS(ns){
+	
+		return H(ns) - H(0);
+	
+	}
+	
+	var x_arr = [];
+	var y_arr = [];
+	var ts_best = 0.0;
+	var ns_best = 0.0;
+	for(var ns = 0; ns < 10; ns += 0.01){
+	
+		var ts = TS(ns);
+		
+		x_arr.push(ns);
+		y_arr.push(ts);
+	
+		if(ts > ts_best){
+			ts_best = ts;
+			ns_best = ns;
+		}
+		
+	}
+	
+	var xdomain = d3.scaleLinear().range([0,width]).domain([0,10]);
+	var ydomain = d3.scaleLinear().range([height,0]).domain([0,10]);
+	
+	for(var i = 0; i < y_arr.length; i++){
+		
+		if(y_arr[i] > 0){
+			ts_ns_svg.append('circle')
+						.attr('r', 1)
+						.attr('cx', xdomain(x_arr[i]))
+						.attr('cy', ydomain(y_arr[i]));
+		}
+	}
+	
+	ts_ns_svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(xdomain).ticks(10))
+      
+	   ts_ns_svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0,0)")
+      .call(d3.axisTop(xdomain).ticks(10))
+      
+	  ts_ns_svg.append("g")
+      	.call(d3.axisLeft(ydomain));
+	  
+	  ts_ns_svg.append("g")
+	  	.attr("transform","translate(200,0)")
+      	.call(d3.axisRight(ydomain));
+	  
+	  ts_ns_svg.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(-25,100)rotate(-90)")
+	  	.text("TS")
+	  	
+	  ts_ns_svg.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(100,240)")
+	  	.text("ns")	
+		
+		ts_ns_svg.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(100,-35)")
+	  	.text("Likelihood Graph")
+		.attr('font-size', '15')
+		.attr('font-weight', 'bold')
+		
+	 ts_ns_svg.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(100,-25)")
+	  	.text(("Most Likely Answer: ts = ").concat(Math.round(ts_best * 100) / 100).concat(" ns = ").concat(Math.round(ns_best * 100) / 100))	
+		.attr('font-size', '10')
+	
+	var elements = dataContainer.selectAll("custom.point");
+		elements.each(function(d) {
+			
+			var node = d3.select(this);
+			
+			if(node.attr('kind') == 'neutrino' && node.attr('ra') > ras['min'] && node.attr('ra') < ras['max'] && node.attr('dec') > decs['min'] && node.attr('dec') < decs['max']){
+				var cont = true;
+				var ang_err = node.attr('err');
+				console.log(ang_err);
+				for(var c = 1; c < 50; c++){
+
+					if(cont){
+						
+						var opacity = String(Math.E ** ((-1 * ((c/1) ** 2)) / (2 * ang_err ** 2)) / (2 * Math.PI * (ang_err ** 2)))
+						console.log(opacity);
+						
+						if(opacity > 0.00001){
+					
+							svg.append('circle')
+								.attr('r', function(d) { if(node.attr('type') == 'shower'){ return c * 10; }else{return 0;}	})
+								.attr('cx', x(node.attr('ra')))
+								.attr('cy', y(node.attr('dec')))
+								.attr('stroke', 'black')                                   
+								.style('fill', 'none')
+								.attr('opacity', String(opacity * 200))
+								.attr('stroke-width', 10.05);
+						
+					}else{
+						cont = false;
+					}
+					}
+				}
+			
+				svg.append('circle')
+					.attr('r', 5)
+					.attr('cx', x(node.attr('ra')))
+					.attr('cy', y(node.attr('dec')));
+			
+			}
+			})
+	
+	svg.append('circle')
+					.attr('r', 2)
+					.attr('cx', x(selected_source[0]))
+					.attr('cy', y(selected_source[1]))
+					.attr('fill', 'red');
+					
+	  svg.append("rect")
+		.attr('x', -200)
+		.attr('y', 0)
+		.attr('width', 200)
+		.attr('height', 500)
+		.attr('fill', 'white');
+	  
+	  svg.append("rect")
+		.attr('x', 0)
+		.attr('y', 210)
+		.attr('width', 500)
+		.attr('height', 100)
+		.attr('fill', 'white');
+		
+	  svg.append("rect")
+		.attr('x', 200)
+		.attr('y', 0)
+		.attr('width', 100)
+		.attr('height', 500)
+		.attr('fill', 'white');
+		
+      svg.append("rect")
+		.attr('x', -200)
+		.attr('y', -50)
+		.attr('width', 500)
+		.attr('height', 50)
+		.attr('fill', 'white');
+	  
+	 svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0," + height + ")")
+      .call(d3.axisBottom(x).ticks(10))
+      
+	   svg.append("g")
+      .attr("class", "axis")
+      .attr("transform", "translate(0,0)")
+      .call(d3.axisTop(x).ticks(10))
+      
+	  svg.append("g")
+      	.call(d3.axisLeft(y));
+	  
+	  svg.append("g")
+	  	.attr("transform","translate(200,0)")
+      	.call(d3.axisRight(y));
+	  
+	  svg.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(-25,100)rotate(-90)")
+	  	.text("Declination (deg)")
+		
+	  svg.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(100,240)")
+	  	.text("Right Ascension (deg)")	
+	
+	svg.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(100,-35)")
+	  	.text("Proximity Visualization")
+		.attr('font-size', '15')
+		.attr('font-weight', 'bold')
+		
+	 svg_container_text.append("rect")
+		.attr('x', -100)
+		.attr('y', -100)
+		.attr('width', 300)
+		.attr('height', 500)
+		.attr('fill', 'white');	
+		
+	 svg_container_text.append("rect")
+		.attr('x', -100)
+		.attr('y', -100)
+		.attr('width', 350)
+		.attr('height', 350)
+		.attr('fill', 'rgb(135,206,250)');
+
+	svg_container_text.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(5,100)rotate(-90)')
+		.text('Source Analysis')
+		.attr('font-size','30')
+		
+	for(var h = 0; h < 50; h++){
+	
+		svg.append("rect")
+			.attr('x', h * (200 / 50))
+			.attr('y', 250)
+			.attr('width', (200 / 50))
+			.attr('height', 20)
+			.attr('fill', 'black')
+			.attr('opacity', 1 - (h / 50));
+	}	
+		
+	svg.append("rect")
+					.attr('x', 0)
+					.attr('y', 250)
+					.attr('width', 200)
+					.attr('height', 20)
+					.attr('fill', 'none')
+					.attr('stroke', 'black')
+					.attr('stroke-width', 2);
+	svg.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(-10,260)')
+		.text('f(r)')
+		.attr('font-size','10');
+	svg.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(0,280)')
+		.text('≥5e-3')
+		.attr('font-size','10');
+	svg.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(50,280)')
+		.text('3.75e-3')
+		.attr('font-size','10');
+	svg.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(100,280)')
+		.text('2.5e-3')
+		.attr('font-size','10');
+	svg.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(150,280)')
+		.text('1.25e-3')
+		.attr('font-size','10');
+	svg.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(200,280)')
+		.text('0')
+		.attr('font-size','10');	
+	svg.append("svg:image")
+.attr('x', 42)
+.attr('y', 270)
+.attr('width', 50)
+.attr('height', 50)
+.attr("xlink:href", "https://i.imgur.com/O7y5cpw.png")
+
+svg.append('text')
+		.attr('text-anchor', 'middle')
+		.attr('transform', 'translate(137,300)')
+		.text('σ = angular error')
+		.attr('font-size','10');
+
+}
+
 console.log('drawPoints done');
 }//end of drawPoints
 });//end of astrojs
@@ -1877,12 +2433,13 @@ function changeEnergyParams(name){
 
 //show the download and use info about the fermi converter
 function show_fermi_info(){
+/*
 	var x = document.getElementById("ferminfo");
 	if(x.style.display == 'block'){
 		x.style.display = 'none';
 	}else{
 		x.style.display = 'block';
-	}
+	}*/
 }
 
 function fluxSpecEnergy(word, indices, kind ){
@@ -1940,7 +2497,7 @@ function updateTypeList(){
 	}
 	if (document.getElementById('track').checked) {typelist.unshift('track');} //************
 	if (document.getElementById('shower').checked) {typelist.unshift('shower');}
-	if (document.getElementById('other').checked) {typelist.unshift('other');} //************
+	//************
 	typelist.unshift('null');
 	return typelist;
 }
@@ -2138,7 +2695,7 @@ var typeList =[];
 function filterLine(text, kind){
 	var words = text.split('\n');
 	var type = 'null';
-	var hese = [];
+	var neutrino_events = [];
 	var search = 1; 
 	var stop = 0;
 	var h; var entry;
@@ -2166,18 +2723,18 @@ function filterLine(text, kind){
 				  + "-" + document.getElementById("year").value + " " + document.getElementById("hour").value + ":" 
 				  + document.getElementById("minute").value + ":" + document.getElementById("second").value)/1000 + margin)};
 				  
-	if (document.getElementById('gamma_ray').checked) {
+	//if (document.getElementById('gamma_ray').checked) {
 		param["kind"].splice(-1, 0, 'gamma_ray', 'Gamma_Ray', 'Gamma_ray'); //fermi
-	} 
-	if (document.getElementById('neutrino').checked) {
+	//} 
+	//if (document.getElementById('neutrino').checked) {
 		param["kind"].splice(-1, 0, 'neutrino', 'Neutrino');//icecube
-	}
-	if (document.getElementById('source').checked) {
+	//}
+	//if (document.getElementById('source').checked) {
 		param["kind"].splice(-1, 0, 'hawc', 'HAWC', 'Source', 'source');//hawc
-	}
-	if (document.getElementById('other').checked) {//start of change
+	//}
+	//if (document.getElementById('other').checked) {//start of change
 		param["kind"].splice(-1, 0, 'other');//other
-	}//end of change
+	//}//end of change
 		
 	indices = getIndices(text);
 	//search must be greater than words.length
@@ -2249,7 +2806,7 @@ function filterLine(text, kind){
 									word[setoff[1]] = c.l;
 									//lat = b or dec, long = l or ra
 								} }); 
-								hese.push({dec: parseFloat(word[setoff[0]]), ra: parseFloat(word[setoff[1]]),
+								neutrino_events.push({dec: parseFloat(word[setoff[0]]), ra: parseFloat(word[setoff[1]]),
 								err: parseFloat(word[setoff[2]]), type: eventType,
 								kind: eventKind, energy: parseFloat(word[setoff[5]]), flux: parseFloat(word[setoff[7]]), spec: parseFloat(word[setoff[8]])}) ;
 								stop ++;
@@ -2259,18 +2816,33 @@ function filterLine(text, kind){
 		}
 		search++;
 	}	
-	return hese;
+	return neutrino_events;
 }//end of filterLine
 
 var inputKinds = [];
 function hideshow(cont){
+	d3.selectAll("svg").remove();
+	
+	var credits = d3.select("body").append("svg")
+    		.attr("width", 1000)
+    		.attr("height", 100)
+  		.append("g")
+   	 		.attr("transform", "translate(" + 0 + "," + 75 + ")");
+	$("svg").css({top:page_height,left:0,position:'absolute'});
+	
+	credits.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(600,0)")
+	  	.text("Created by Elsa Forberger, Haley James, and Blake Gallay")	
+		.attr('font-size','15')
+	
 	var r;
 	if (document.getElementById("timebox").checked){
 	document.getElementById("times").style.display = "initial"; 
-	 document.getElementById("vampire").style.display = "initial";
+	 document.getElementById("set_margin").style.display = "initial";
 	}else{
 	document.getElementById("times").style.display = "none";
-	 document.getElementById("vampire").style.display = "none";
+	 document.getElementById("set_margin").style.display = "none";
 	}
 	if(document.getElementById("spec_index").checked){
 	document.getElementById("spec_form").style.display = 'initial';
@@ -2317,7 +2889,7 @@ function hideshow(cont){
 							}
 						}
 						
-						if (document.getElementById(kind).checked && isSelected(kind, input.files[r].name) && cont){
+						if (isSelected(kind, input.files[r].name) && cont){
 							text.push([input.files[r].name, filterLine(reader.result, kind+'userupload')]);
 						}
 						addFileName(input.files[r].name, kind);
@@ -2351,7 +2923,7 @@ function changeParams(thing){
 					if(rawFile.status === 200 || rawFile.status == 0)
 					{	
 						var textid = (rawFile.responseText.split("\n")[2].split(" ")[4].toLowerCase() == 'hawc') ? 'source' :rawFile.responseText.split("\n")[2].trim().split(/\s+/)[4].toLowerCase(); console.log(textid);
-            			if (document.getElementById(textid).checked && isSelected(textid, files[q])){
+            			if (isSelected(textid, files[q])){
 							output.push([files[q], filterLine(rawFile.responseText)]);
 						}
 						else {
@@ -2379,11 +2951,11 @@ function changeParams(thing){
 //files already included in the program. They should be in the Data file.
 /*var files = ["/~eforberger/Data/hawc2.txt","/~eforberger/Data/nhdata.txt", "/~eforberger/Data/output_Observation.txt",
 		     "/~eforberger/Data/fermit1.txt", "/~eforberger/Data/fermit2.txt", "/~eforberger/Data/fermit3.txt",
-		      "/~eforberger/Data/fermit4.txt", "/~eforberger/Data/pointsources.txt"];*/
-		      
-var files = ["/Data/hawc2.txt","/Data/nhdata.txt", "/Data/output_Observation.txt",
-		     "/Data/fermit1.txt", "/Data/fermit2.txt", "/Data/fermit3.txt",
-		      "/Data/fermit4.txt", "/Data/pointsources.txt"];//to run locally
+		      "/~eforberger/Data/fermit4.txt", "/~eforberger/Data/pointsources.txt"];
+		      */
+var files = ["./Data/hawc2.txt","./Data/nhdata.txt", "./Data/output_Observation.txt",
+		     "./Data/fermit1.txt", "./Data/fermit2.txt", "./Data/fermit3.txt",
+		      "./Data/fermit4.txt", "./Data/pointsources.txt"];//to run locally
 		      
 
 readTextFile(files,function (filelist){
@@ -2395,11 +2967,30 @@ readTextFile(files,function (filelist){
 //call skymap, draws the data and map, and handles zooming
 skymap(filelist);
 });
-}//end of change params
+}
+
+if(selected_source[0] == null){
+var page_height = 1000;
+}else{
+var page_height = 1200;
+}
+
+//end of change params
+
+var credits = d3.select("body").append("svg")
+    		.attr("width", 1000)
+    		.attr("height", 100)
+  		.append("g")
+   	 		.attr("transform", "translate(" + 0 + "," + 75 + ")");
+	$("svg").css({top:page_height,left:0,position:'absolute'});
+	
+	credits.append("text")
+	  	.attr("text-anchor", "middle")
+	  	.attr("transform", "translate(600,0)")
+	  	.text("Created by Elsa Forberger, Haley James, and Blake Gallay")	
+		.attr('font-size','15')
+
 </script>
-</div>
-<div style="width:100%;clear:both; height: 30px;">
-<p> By Elsa Forberger, Haley James, Blake Gallay, Marcus Graham, and Emme Hannibal </p>
 </div>
 
 </body>
