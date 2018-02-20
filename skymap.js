@@ -1,10 +1,3 @@
-//import utility.js
-
-$.getScript("utility.js", function() {
-   alert("Script loaded but not necessarily executed.");
-});
-
-
 function skymap(stringout) {
 
 if (typeof Object.assign != 'function') {

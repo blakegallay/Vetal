@@ -32,6 +32,7 @@ bgallay@icecube.wisc.edu
   <script src="getIndices.js"></script>
   
   <script src="utility.js"></script>
+  <script src="updateTypeList.js"></script>
   
   
   
@@ -687,22 +688,6 @@ function show_fermi_info(){
 
 var Galactic = true;
 
-
-function updateTypeList(){
-	var k;
-	var typelist = [];
-	//this for loops goes through the source types and adds the selected ones to typeList
-	for (k = 1; k < 21; k++){
-		if (document.getElementById(String(k)).checked){
-			typelist.unshift(document.getElementById(String(k)).name.toLowerCase());
-		}
-	}
-	if (document.getElementById('track').checked) {typelist.unshift('track');} //************
-	if (document.getElementById('shower').checked) {typelist.unshift('shower');}
-	//************
-	typelist.unshift('null');
-	return typelist;
-}
 
 //this sets the text displayed in the file selector. User uploaded files will just have their filename as their text
 function getDropDownText(fileName){

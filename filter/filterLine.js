@@ -104,7 +104,7 @@ function filterLine(text, kind){
 		if (param["kind"].includes(eventKind.split('userupload')[0].toLowerCase())){ 
 			 if (updateTypeList().includes(eventType.toLowerCase()) || eventKind.includes('userupload')){
 					if (document.getElementById("timebox").checked == false || param['timeMin'] < parseFloat(word[setoff[6]]) && param['timeMax'] > parseFloat(word[setoff[6]])){
-						if (fluxSpecEnergy(word, setoff, eventKind)){ //compares flux/spec/energy of event to the slider ranges - only passes if within range
+						if (fluxSpecEnergy(word, setoff, eventKind)){ //compares flux/spec/energy of event to the slider ranges - only passes if within
 							astrojs.ready(function(e){
 								if (Galactic){
 									var c = astrojs.coordinates.eq2gal(parseFloat(word[setoff[1]]), parseFloat(word[setoff[0]]), 2000);
