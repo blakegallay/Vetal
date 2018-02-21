@@ -939,11 +939,12 @@ var drawPoint = false;
 		
 		var x = d3.mouse(this)[0];
 		var y = d3.mouse(this)[1];
-		console.log(canGo);
+		console.log('test');
 		console.log('x: '+ x+',  y: '+ y);
 		var elements = dataContainer.selectAll("custom.point");
 		elements.each(function(d) {
 			var node = d3.select(this);
+			console.log(node.attr('kind'));
 			var pointCoords = project([node.attr('ra'), node.attr('dec')]);
 			if (Math.abs(x-pointCoords[0]) < 5 && Math.abs(y-pointCoords[1]) < 5){
 				
@@ -992,10 +993,12 @@ var drawPoint = false;
 				
 				if(node.attr('kind').includes('source')){
 					var old_source = selected_source;
+					
 					selected_source = [parseFloat(node.attr('ra')), parseFloat(node.attr('dec'))];
 					if(old_source != selected_source){
 						analysis_drawn = true;
-						hideshow(true);
+					
+						initialize();
 					}
 					
 					mydraw.circle({

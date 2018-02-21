@@ -1,6 +1,6 @@
-function changeParams(thing){
-		//handles files already in the program
-		function readTextFile(files, ready){
+function pushFiles(thing){
+	//handles files already in the program
+	function readTextFile(files, ready){
 		var q;
 		var output = [];
 		for (q = 0; q < files.length; q++){
@@ -15,12 +15,12 @@ function changeParams(thing){
 					{	
 						var textid = (rawFile.responseText.split("\n")[2].split(" ")[4].toLowerCase() == 'hawc') ? 'source' :rawFile.responseText.split("\n")[2].trim().split(/\s+/)[4].toLowerCase(); console.log(textid);
             			if (isSelected(textid, files[q])){
-							output.push([files[q], filterLine(rawFile.responseText)]);
+							output.push([files[q], filter(rawFile.responseText)]);
 						}
 						else {
 							output.push([files[q], []]);
 						}
-						addFileName(files[q], rawFile.responseText.split("\n")[1].split(" ")[4].toLowerCase());
+						addFile(files[q], rawFile.responseText.split("\n")[1].split(" ")[4].toLowerCase());
 						findRangeEnergy(files[q], rawFile.responseText, textid);
 						if (output.length >= files.length){
 							ready(output);
@@ -38,22 +38,16 @@ function changeParams(thing){
 			rawFile.send();
 			}//here
 }
-		   	//files already included in the program. They should be in the Data file.
-/*var files = ["/~eforberger/Data/hawc2.txt","/~eforberger/Data/nhdata.txt", "/~eforberger/Data/output_Observation.txt",
-		     "/~eforberger/Data/fermit1.txt", "/~eforberger/Data/fermit2.txt", "/~eforberger/Data/fermit3.txt",
-		      "/~eforberger/Data/fermit4.txt", "/~eforberger/Data/pointsources.txt"];
-		      */
-var files = ["./Data/hawc2.txt","./Data/nhdata.txt", "./Data/output_Observation.txt",
-		     "./Data/fermit1.txt", "./Data/fermit2.txt", "./Data/fermit3.txt",
-		      "./Data/fermit4.txt", "./Data/pointsources.txt"];//to run locally
 
-readTextFile(files,function (filelist){
-		
+
+readTextFile(files, function (filelist){
+
 	//adds user inputted files to filelist:
 	for (var h = 0; h  < thing.length; h++){
 		filelist.push(thing[h]);
 	}
 //call skymap, draws the data and map, and handles zooming
+console.log(filelist[0]);
 skymap(filelist);
 });
 }

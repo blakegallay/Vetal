@@ -17,6 +17,6 @@ function changeEnergyParams(name){
 		sliders(name+"slider").set(parseFloat(min),parseFloat(max),null);
 		if (name == 'source'){ //go and switch the displayed text
 		//hideshow is called here because changeEnergyParams() could be being called because of the user changing the flux/spectral index checkboxes. When they change, not only does the energy values shown on the slider need to change, but the text over the slider needs to change as well, and that is done in hideshow.
-			hideshow(false);
+			hideshow();
 		}
 }

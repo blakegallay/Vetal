@@ -1,4 +1,4 @@
-function addFileName (filepath, placement){
+function addFile (filepath, placement){
 if (placement == 'hawc'  || placement == 'fermi'){
 	placement = 'source';
 }

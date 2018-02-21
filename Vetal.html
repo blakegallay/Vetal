@@ -20,19 +20,34 @@ bgallay@icecube.wisc.edu
 <head>
 
 
-
+  <!-- Import files -->
+  
   <script src="main.js"></script>
   <script src="skymap.js"></script>
-  <script src="changeParams.js"></script>
-  <script src="findRangeEnergy.js"></script>
-  <script src="changeEnergyParams.js"></script>
-  <script src="fluxSpecEnergy.js"></script>
-  <script src="filterLine.js"></script>
-  <script src="addFileName.js"></script>
-  <script src="getIndices.js"></script>
-  
   <script src="utility.js"></script>
-  <script src="updateTypeList.js"></script>
+  <script src="./read/customReader.js"></script>
+  
+  
+  <!-- /read and filter -->
+  
+  <script src="./read/pushFiles.js"></script>
+  <script src="./read/parseCustomFormat.js"></script>
+  <script src="./read/findRangeEnergy.js"></script>
+  <script src="./read/findRangeEnergy.js"></script>
+ 
+  <script src="./read/filter.js"></script>
+  <script src="./read/fluxSpecEnergy.js"></script>
+  
+  
+  <!-- /ui -->
+  
+  <script src="changeEnergyParams.js"></script>
+  <script src="addFileName.js"></script>
+  <script src="ui.js"></script>
+  
+  
+  
+  
   
   
   
@@ -462,7 +477,7 @@ li.links {
 
 <div>
 <label for="timebox">Toggle filtering by time</label>
-  <input type="checkbox" name="timebox" id="timebox" onchange = "hideshow(false)"><br></br>
+  <input type="checkbox" name="timebox" id="timebox" onchange = "toggle_time()"><br></br>
  	<form id="times">
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   	<label for="year">Year</label>
@@ -529,8 +544,8 @@ li.links {
 <div id="selectioninfo_neutrino">
   <b>When displaying neutrino data, click on the data points to select events. </b>
   <br>
-  Only display events within selected neutrino error regions<input type='checkbox' id='onlyErr' onchange='hideshow(true)'>
-  Only show selected neutrinos:<input type='checkbox' id='filterNeutrinos' onchange='hideshow(true)'>
+  Only display events within selected neutrino error regions<input type='checkbox' id='onlyErr' onchange='initialize()'>
+  Only show selected neutrinos:<input type='checkbox' id='filterNeutrinos' onchange='intialize()'>
   <br>
   <br>
 </div>
@@ -541,7 +556,7 @@ li.links {
 <div id="div_canvas">
 <br>
 <div>
-<button type="button" onclick="hideshow(true)">Draw SkyMap</button>
+<button type="button" onclick="initialize()">Draw SkyMap</button>
 </div>
 
 
@@ -573,7 +588,7 @@ function clear_selection(){
 selected_events = [];
 selected_source = [];
 
-hideshow(true);
+initialize();
 
 }
 
@@ -669,7 +684,7 @@ for (i = 0; i < acc.length; i++) {
 }
 
 
- hideshow(true);
+ initialize();
 // Object.assign polyfill
 
 //stringout is all the points to draw.
