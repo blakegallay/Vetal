@@ -1,7 +1,13 @@
 /**
-*a dumbass name for a function
-*@function hideshow
-*@param {boolean} cont wtf does that even mean!?
+*@namespace customReader
+*@memberof Processing
+*/
+
+/**
+*Handles user inputted files
+*@function customReader
+*@param {array} input gunth gunth
+*@memberof Processing.customReader
 */
 function customReader(input){
 	d3.selectAll("svg").remove();
@@ -20,7 +26,9 @@ function customReader(input){
 		.attr('font-size','15')
 	
 	//handles user inputted files
-	
+		/**
+		*@memberof Processing
+		*/
 		var text = [];
 		var inInputKinds = false
 		for (var r =0; r < input.files.length; r++){
@@ -41,6 +49,7 @@ function customReader(input){
                         }
                     }
                 }
+				
                 inputKinds.push([input.files[r].name, kind]);
             }
 			var reader = new FileReader();

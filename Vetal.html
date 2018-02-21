@@ -12,7 +12,7 @@ Vetal is under active development at github.com/bgallay/Vetal.
 
 Contact the developers:
 
-bgallay@icecube.wisc.edu
+blakejg27@gmail.com
 
 -->
 <!DOCTYPE html>
@@ -23,25 +23,22 @@ bgallay@icecube.wisc.edu
   <!-- Import files -->
   
   <script src="main.js"></script>
-  <script src="skymap.js"></script>
+  <script src="./output/skymap.js"></script>
   <script src="utility.js"></script>
-  <script src="./read/customReader.js"></script>
+  <script src="./processing/customReader.js"></script>
   
   
   <!-- /read and filter -->
   
-  <script src="./read/pushFiles.js"></script>
-  <script src="./read/parseCustomFormat.js"></script>
-  <script src="./read/findRangeEnergy.js"></script>
- 
-  <script src="./read/filter.js"></script>
+  <script src="./processing/pushFiles.js"></script>
+  <script src="./processing/parseCustomFormat.js"></script>
+  <script src="./processing/findRangeEnergy.js"></script>
+  <script src="./processing/filter.js"></script>
   
   
   <!-- /ui -->
-  
-  <script src="updateEnergyRange.js"></script>
-  <script src="addFile.js"></script>
-  <script src="ui.js"></script>
+
+  <script src="interface.js"></script>
   
   
   
@@ -751,7 +748,15 @@ var credits = d3.select("body").append("svg")
 	  	.attr("transform", "translate(600,0)")
 	  	.text("Created by Elsa Forberger, Haley James, and Blake Gallay")	
 		.attr('font-size','15')
-
+		
+function coordType(){
+if (document.getElementById("galactic").checked){
+Galactic = true;
+}
+if (document.getElementById("equatorial").checked){
+Galactic = false;
+}
+}
 </script>
 </div>
 
