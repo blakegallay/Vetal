@@ -33,16 +33,14 @@ bgallay@icecube.wisc.edu
   <script src="./read/pushFiles.js"></script>
   <script src="./read/parseCustomFormat.js"></script>
   <script src="./read/findRangeEnergy.js"></script>
-  <script src="./read/findRangeEnergy.js"></script>
  
   <script src="./read/filter.js"></script>
-  <script src="./read/fluxSpecEnergy.js"></script>
   
   
   <!-- /ui -->
   
-  <script src="changeEnergyParams.js"></script>
-  <script src="addFileName.js"></script>
+  <script src="updateEnergyRange.js"></script>
+  <script src="addFile.js"></script>
   <script src="ui.js"></script>
   
   
@@ -292,7 +290,7 @@ li.links {
 <div id="other_div" class="panel" ">
   <div id = 'Ice Cube' >
 	
-	<select multiple id="neutrinoselect" style = "width: 95%" onchange = "changeEnergyParams('neutrino')" onmouseover = 'changeSelectedColor("neutrino")' > </select>
+	<select multiple id="neutrinoselect" style = "width: 95%" onchange = "updateEnergyRange('neutrino')" onmouseover = 'changeSelectedColor("neutrino")' > </select>
      
      <fieldset style="width:200px">
  	<legend>IceCube Types</legend>
@@ -330,7 +328,7 @@ li.links {
 
 <div id="other_div2" class="panel">
 <div id = 'Fermi/Gamma Ray Events'  >
-	<select multiple id="gamma_rayselect"  style = "width: 95%" onchange = "changeEnergyParams('gamma_ray')" onmouseover = 'changeSelectedColor("gamma_ray")'></select>
+	<select multiple id="gamma_rayselect"  style = "width: 95%" onchange = "updateEnergyRange('gamma_ray')" onmouseover = 'changeSelectedColor("gamma_ray")'></select>
 <br></br><br></br>
 <form id = 'gamma_rayinput'>
 
@@ -359,7 +357,7 @@ li.links {
 <div id = 'Gamma Ray Sources'  >
 
 
-	<select multiple id="sourceselect"  style = "width: 95%" onchange = "changeEnergyParams('source')" onmouseover = 'changeSelectedColor("source")'></select>
+	<select multiple id="sourceselect"  style = "width: 95%" onchange = "updateEnergyRange('source')" onmouseover = 'changeSelectedColor("source")'></select>
 	
 
 	<div class="container">
@@ -415,9 +413,9 @@ li.links {
     <form id = sourceinput>
 	
 	<label for="spec_index">Spectral Index</label>
-    <input type="radio" name="radio_name" id="spec_index" onchange="changeEnergyParams('source')" checked=true>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <input type="radio" name="radio_name" id="spec_index" onchange="updateEnergyRange('source')" checked=true>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
      <label for="flux">Flux</label>
-    <input type="radio" name="radio_name" id="flux" onchange="changeEnergyParams('source')" ><br></br>
+    <input type="radio" name="radio_name" id="flux" onchange="updateEnergyRange('source')" ><br></br>
     
     <p id ="spec_form">Choose range of spectral index and corresponding colors to display.</p>
     
@@ -444,7 +442,7 @@ li.links {
 
 <div id="other_div3" class="panel">
 <div id = 'Other Data' >
-	<select multiple id="otherselect"  style = "width: 95%" onchange = "changeEnergyParams('other')" onmouseover = 'changeSelectedColor("other")' > <!--onmouseover = 'changeSelectedColor()'-->
+	<select multiple id="otherselect"  style = "width: 95%" onchange = "updateEnergyRange('other')" onmouseover = 'changeSelectedColor("other")' > <!--onmouseover = 'changeSelectedColor()'-->
 	<option></option>
 	</select>
 

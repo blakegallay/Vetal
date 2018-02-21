@@ -1,5 +1,5 @@
 //set the sliders max and min energy params according to the files selected
-function changeEnergyParams(name){
+function updateEnergyRange(name){
 	var a = 0;
 	var min = -1;
 	var max = -1;
