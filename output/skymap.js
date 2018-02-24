@@ -1,3 +1,15 @@
+/**
+*@namespace skymap
+*@memberof Output
+*/
+
+/**
+*Defines drawing function and draws the skymap
+*@function skymap
+*@param {array} stringout all filtered event data
+*<p> format: (input format later)
+*@memberof Output.skymap
+*/
 function skymap(stringout) {
 
 if (typeof Object.assign != 'function') {

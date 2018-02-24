@@ -6,7 +6,7 @@
 /**
 *Handles user inputted files
 *@function customReader
-*@param {array} input gunth gunth
+*@param {array} input
 *@memberof Processing.customReader
 */
 function customReader(input){
