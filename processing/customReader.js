@@ -27,7 +27,7 @@ function customReader(input){
 	
 	//handles user inputted files
 		/**
-		*@memberof Processing
+		*@memberof Processing.customReader
 		*/
 		var text = [];
 		var inInputKinds = false

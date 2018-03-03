@@ -44,11 +44,13 @@ function toRadians(angle) {
 The following functions act as cosmetic, but not functional, namespaces in order to provide a hierarchical structure to documentation.
 */
 /**
+*Handles UI elements 
 *@namespace Interface
 */
 function interface_doc(){
 }
 /**
+*Handles various misc. utilities
 *@namespace Utility
 */
 function utility_doc(){
