@@ -1,4 +1,14 @@
-function filter(text, kind){
+/**
+*@namespace filter
+*@memberof Processing
+*/
+
+/**
+
+*@function filter
+*@memberof Processing.filter
+*/
+function filter(text, kind){ //readFile
 	
 	var lines = text.split('\n');
 	var type = 'null';
@@ -122,7 +132,7 @@ function filter(text, kind){
 	return events;
 }//end of filterLine
 
-function selectedSourceTypes(){
+function selectedSourceTypes(){ //updateTypeList
 	var k;
 	var typelist = [];
 	//this for loops goes through the source types and adds the selected ones to typeList
@@ -138,7 +148,7 @@ function selectedSourceTypes(){
 	return typelist;
 }
 
-function withinRange(word, indices, kind ){
+function withinRange(word, indices, kind ){ //changeEnergyParams
 	var range = []; 
 	var refinedKind =(kind.toLowerCase().includes('hawc'))? 'source': kind.split('userupload')[0].toLowerCase();
 	/*

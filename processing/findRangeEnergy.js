@@ -1,4 +1,4 @@
-function findRangeEnergy(filename, text, kind){
+function findRangeEnergy(filename, text, kind){ // findRangeEnergy
 	var setoff = [0,0,0,0,0,0,0,0,0];
 	indices = parseCustomFormat(text);
 	var d;

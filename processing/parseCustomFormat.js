@@ -1,4 +1,23 @@
-function parseCustomFormat(text){
+/**
+*@namespace parseCustomFormat
+*@memberof Processing
+*/
+
+/**
+*Parses custom files with non-default organization.
+*<p>In order to read custom files, Vetal must determine how the data is organized.
+*<p>The general acceptable file format consists of a raw text file organized as a spreadsheet w/ headers located on the first line. 
+*<p>This function finds those headers, and reorganizes the data to fit a specific format:
+ * <ul style="list-style: none;">
+ *  <li> time filtering ("times", "set_margin")
+ *  <li> flux filtering ("flux_form")
+ *  <li> spectral index filtering ("spec_form")
+ * </ul>
+*@function parseCustomFormat
+*@memberof Processing.parseCustomFormat
+*/
+
+function parseCustomFormat(text){ //getIndices
 var words = text.split('\n');
 headed = false;
 var indices = [0,1,2,3,4,5,6,7,8,9];

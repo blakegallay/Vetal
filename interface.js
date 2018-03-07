@@ -9,7 +9,7 @@
 *@memberof Interface
 */
 
-function hideshow(){
+function hideshow(){ //showUIParts
 	if (document.getElementById("timebox").checked){
 		document.getElementById("times").style.display = "initial"; 
 		document.getElementById("set_margin").style.display = "initial";
@@ -31,7 +31,7 @@ function hideshow(){
 }
 
 //set the sliders max and min energy params according to the files selected
-function updateEnergyRange(name){
+function updateEnergyRange(name){ //
 	var a = 0;
 	var min = -1;
 	var max = -1;
@@ -54,7 +54,7 @@ function updateEnergyRange(name){
 }
 
 
-function addFile (filepath, placement){
+function addFile (filepath, placement){ //addFileName
 if (placement == 'hawc'  || placement == 'fermi'){
 	placement = 'source';
 }

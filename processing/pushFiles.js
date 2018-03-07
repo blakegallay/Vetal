@@ -1,5 +1,23 @@
-function pushFiles(thing){
+/**
+*@namespace pushFiles
+*@memberof Processing
+*/
+
+/**
+*Handles files already in the program
+*@function pushFiles
+*@memberof Processing.pushFiles
+*@param {} thing - a var
+*/
+function pushFiles(thing){ //readprogramfiles
 	//handles files already in the program
+	/**
+	*Reads a raw text file(s)
+	*@function readTextFile
+	*@memberof Processing.pushFiles
+	*@param {} files
+	*@param {} ready
+	*/
 	function readTextFile(files, ready){
 		var q;
 		var output = [];

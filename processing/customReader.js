@@ -9,7 +9,7 @@
 *@param {array} input
 *@memberof Processing.customReader
 */
-function customReader(input){
+function customReader(input){ //readuserfiles
 	d3.selectAll("svg").remove();
 	
 	var credits = d3.select("body").append("svg")
