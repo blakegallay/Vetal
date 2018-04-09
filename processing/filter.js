@@ -1,12 +1,7 @@
 /**
-*@namespace filter
-*@memberof Processing
-*/
-
-/**
 
 *@function filter
-*@memberof Processing.filter
+*@memberof Processing
 */
 function filter(text, kind){ //readFile
 	
@@ -48,7 +43,7 @@ function filter(text, kind){ //readFile
 	
 		param["kind"].splice(-1, 0, 'other');//other
 		
-	format = parseCustomFormat(text);
+	format = parseFormat(text);
 	
 	//search must be greater than lines.length
 	//stop is if you want a certain amount of data points from the current set

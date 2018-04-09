@@ -27,6 +27,7 @@ function hideshow(){ //showUIParts
 	}else{
 		document.getElementById("flux_form").style.display = 'none';
 	}
+
 	
 }
 

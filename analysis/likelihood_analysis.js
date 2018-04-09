@@ -1,4 +1,16 @@
-function analysis(neutrinos_drawn, mydraw, dataContainer){
+/**
+*Performs likelihood analysis on neutrino events given a set of known gamma-ray sources.
+*<p> The display is made up of svg objects, on the same layer as the canvas objects making up the skymap. All likelihood-related objects are located below the skymap.
+*<p> Two graphs are displayed to visually convey the results of the analysis. The following are in-depth explanations of how these graphs are generated, and how to interpret them.
+*<p> <b> Likelihood Graph: </b> 
+*<p> This graph displays the TS (test statistic), which is a quantification of the likelihood that ns neutrino events originated from the selected source, 
+*<p> for ns values between 0 and 10. In calculating the TS, spacial clustering of events, as well as their proximty to the source and their associated
+*<p> angular errors are taken into account. Generally, TS ≥ 25 is considered significant.
+*@function likelihood_analysis
+*@memberof Analysis
+*/
+ 
+function likelihood_analysis(neutrinos_drawn, mydraw, dataContainer){
 if(selected_source[0] != null && neutrinos_drawn){ //performs likelihood analysis if a gamma-ray source is selected and neutrinos are being drawn
 
 mydraw.circle({

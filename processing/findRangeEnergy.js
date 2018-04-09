@@ -1,6 +1,6 @@
 function findRangeEnergy(filename, text, kind){ // findRangeEnergy
 	var setoff = [0,0,0,0,0,0,0,0,0];
-	indices = parseCustomFormat(text);
+	indices = parseFormat(text);
 	var d;
 	var min; var max; var extramin; var extramax;
 	var gotStartR1 = [false, false];

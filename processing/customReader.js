@@ -1,13 +1,8 @@
 /**
-*@namespace customReader
-*@memberof Processing
-*/
-
-/**
 *Handles user inputted files
 *@function customReader
 *@param {array} input
-*@memberof Processing.customReader
+*@memberof Processing
 */
 function customReader(input){ //readuserfiles
 	d3.selectAll("svg").remove();
@@ -26,9 +21,7 @@ function customReader(input){ //readuserfiles
 		.attr('font-size','15')
 	
 	//handles user inputted files
-		/**
-		*@memberof Processing.customReader
-		*/
+		var inputKinds = [];
 		var text = [];
 		var inInputKinds = false
 		for (var r =0; r < input.files.length; r++){
@@ -52,8 +45,10 @@ function customReader(input){ //readuserfiles
 				
                 inputKinds.push([input.files[r].name, kind]);
             }
+			
+			
 			var reader = new FileReader();
-				reader.onload = function (r, reader, inputKinds){ return function() {
+				reader.onload = function (r, reader, inputKinds){ return function() { //executes each time a file is read
 					var kind;
 						for (item in inputKinds){
 							if (inputKinds[item][0] == input.files[r].name) {
@@ -71,10 +66,13 @@ function customReader(input){ //readuserfiles
 							pushFiles(text);
 						}
 			};  } (r, reader, inputKinds);
+			
+			
+			
 			 if (input.files.length > 0){
-			 while (reader.readyState == 1 ){
+			 while (reader.readyState == 1 ){ //while there are still files left to read
 				}
-				 reader.readAsText(input.files[r]);
+				 reader.readAsText(input.files[r]); //read the next file and execute the above onload function
 				}
 		}
 		if (input.files.length <= 0 && cont){pushFiles([]);}

@@ -1,15 +1,10 @@
 /**
-*@namespace pushFiles
-*@memberof Processing
-*/
-
-/**
 *Handles files already in the program
 *@function pushFiles
-*@memberof Processing.pushFiles
-*@param {} thing - a var
+*@memberof Processing
+*@param {} userData - user uploaded data, parsed and filtered by customReader.js/filter.js
 */
-function pushFiles(thing){ //readprogramfiles
+function pushFiles(userData){ //readprogramfiles
 	//handles files already in the program
 	/**
 	*Reads a raw text file(s)
@@ -61,8 +56,8 @@ function pushFiles(thing){ //readprogramfiles
 readTextFile(files, function (filelist){
 
 	//adds user inputted files to filelist:
-	for (var h = 0; h  < thing.length; h++){
-		filelist.push(thing[h]);
+	for (var h = 0; h  < userData.length; h++){
+		filelist.push(userData[h]);
 	}
 //call skymap, draws the data and map, and handles zooming
 console.log(filelist[0]);

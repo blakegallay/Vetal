@@ -1,35 +1,40 @@
 /**
-*@namespace parseCustomFormat
+*Parses files with non-standard organization.
+*<p> Called by filter.js when reading and filtering files
+*<p>In order to read custom files, Vetal must determine how the data is organized.
+*<p>The general acceptable file format consists of a raw text file organized as a spreadsheet w/ headers located on the first line. 
+*<p>This function finds those headers, and communicates back to the file reader how they are organized:
+*<p> Vetal format:
+ * <ul style="list-style: none;">
+ *  <li> 1) declination (degrees)
+ *  <li> 2) right ascension (degrees)
+ *  <li> 3) error/angular resolution 
+ *  <li> 4) topology/event signature
+ *  <li> 5) error/angular resolution 
+ *  <li> 6) energy
+ *  <li> 7) date/time
+ *  <li> 8) flux
+ *  <li> 9) spectral index
+ * </ul>
+*@function parseFormat
+*@param {String} text - the raw text of a data file
+*@returns {Array} indices - an array of integers telling how the columns/headers of the file are arranged in comparison to the standard Vetal format. <p> For example, a file organized as {ra, dec} would return [2, 1, null, null....] - the first index holds right ascension which is the second index in the default format, the second index holds dec (1st default format index), and no other data is contained so the remaining indices are null.
 *@memberof Processing
 */
 
-/**
-*Parses custom files with non-default organization.
-*<p>In order to read custom files, Vetal must determine how the data is organized.
-*<p>The general acceptable file format consists of a raw text file organized as a spreadsheet w/ headers located on the first line. 
-*<p>This function finds those headers, and reorganizes the data to fit a specific format:
- * <ul style="list-style: none;">
- *  <li> time filtering ("times", "set_margin")
- *  <li> flux filtering ("flux_form")
- *  <li> spectral index filtering ("spec_form")
- * </ul>
-*@function parseCustomFormat
-*@memberof Processing.parseCustomFormat
-*/
-
-function parseCustomFormat(text){ //getIndices
+function parseFormat(text){ //getIndices
 var words = text.split('\n');
 headed = false;
-var indices = [0,1,2,3,4,5,6,7,8,9];
+var indices = [0,1,2,3,4,5,6,7,8,9]; //default format
 var offset = 0;
 
-if (words[0].trim().toLowerCase().includes('dec')){
+if (words[0].trim().toLowerCase().includes('dec')){ //check for headers
 	console.log('found header');
 		headed = true
 		indices = [null,null,null,null,null,null,null,null,null,null]
 		var columns = words.shift().trim().split(/\s+/);
 		
-		var combos = {"DISTRIBUTED":"ENERGY",
+		var combos = {"DISTRIBUTED":"ENERGY", //pairs of words which act as a single header
 					  "ANG":"RESOLUTION",
 					  "ANGULAR":"RESOLUTION",
 					  "DEPOSITED":"ENERGY",
@@ -47,7 +52,7 @@ if (words[0].trim().toLowerCase().includes('dec')){
 				}
 			}
 		}
-	//console.log(columns);
+		
 		for(m = 0; m < columns.length; m++){
 			c = columns[m]
 			if (c.toUpperCase().charAt(0) == "[" && c.toUpperCase().charAt(c.length-1) == "]") {
@@ -91,6 +96,6 @@ if (words[0].trim().toLowerCase().includes('dec')){
 		}
 		
 	}
-
+	
 	return indices;
 }

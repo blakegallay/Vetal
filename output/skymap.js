@@ -1345,7 +1345,7 @@ var clearselection_html = document.getElementById("clearselection");
 		clearselection_html.style.display = "none";
 	}
 
-analysis(neutrinos_drawn, mydraw, dataContainer);
+likelihood_analysis(neutrinos_drawn, mydraw, dataContainer);
 console.log('drawPoints done');
 }//end of drawPoints
 });//end of astrojs
