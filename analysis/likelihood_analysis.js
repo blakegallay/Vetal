@@ -3,10 +3,19 @@
 *<p> The display is made up of svg objects, on the same layer as the canvas objects making up the skymap. All likelihood-related objects are located below the skymap.
 *<p> Two graphs are displayed to visually convey the results of the analysis. The following are in-depth explanations of how these graphs are generated, and how to interpret them.
 *<p> <b> Likelihood Graph: </b> 
-*<p> This graph displays the TS (test statistic), which is a quantification of the likelihood that ns neutrino events originated from the selected source, 
-*<p> for ns values between 0 and 10. In calculating the TS, spacial clustering of events, as well as their proximty to the source and their associated
-*<p> angular errors are taken into account. Generally, TS ≥ 25 is considered significant.
-*@function likelihood_analysis
+*<p> This graph displays the TS (test statistic), which is a quantification of the likelihood that ns neutrino events originated from the selected source,  for ns values between 0 and 10. In calculating the TS, spacial clustering of events, as well as their proximty to the source and their associated angular errors are taken into account. Generally, TS ≥ 25 is considered significant.
+*<p> The following equations are used to compute TS: 
+*<p> 
+*<p> where ns = 0 is the null hypothesis that ns neutrino events correlate with the selected gamma-ray source, and is bounded between zero and N. S accounts for the event angular distribution. B is the background distribution which is assumed to be isotropic (1/4pi).N = # of neutrino events; M = # of sources in target catalog
+*<p> The output to this equation is the calculated probability that exactly ns neutrino events are associated with the target source. 
+*<p> The angular distribution of events takes the form of a 2-dimensional Kent distribution. This is the standard probability distribution for these events -- centered around the given coordinates, the true location of the source may lie anywhere in the surrounding region. This is why gamma-ray sources even in moderate proximity to neutrino events are of significance. 
+*<p>
+*<p> where L is our likelihood definition. Though our definition of TS is somewhat arbitrary, it serves to construct a scale where TS>25 can be considered statistically significant.
+*<p>
+*<p> <b> Proximity Visualization: </b>
+*<p> This graphic displays a 20° Right Ascension x 20° Declination region surrounding the selected gamma-ray source. Neutrino events and their error regions are also displayed. The opacity of error regions at any given point in the graph relays the probability that the true location of an event lies on that point. In this way, the viewer can visualize how the angular distribution of nearby events actually relates to the location of the sources they select. 
+*<p> As in our calculation of TS, the error regions of neutrino events follow a 2D Kent Distribution.
+@function likelihood_analysis
 *@memberof Analysis
 */
  
