@@ -10,7 +10,10 @@
     -   [initialize](#initialize)
 -   [Output](#output)
     -   [skymap](#skymap)
+        -   [draw](#draw)
         -   [skymap](#skymap-1)
+        -   [drawPoints](#drawpoints)
+        -   [types](#types)
 -   [Processing](#processing)
     -   [customReader](#customreader)
     -   [filter](#filter)
@@ -69,6 +72,15 @@ Called on load, as well as on significant changes (making selections, performing
 
 ### skymap
 
+#### draw
+
+Defines drawing function and draws the skymap background
+
+**Parameters**
+
+-   `context` **[CanvasRenderingContext2D](https://developer.mozilla.org/docs/Web/API/CanvasRenderingContext2D)** the canvas drawing context. in Vetal's case, the used instance of draw will always be a two-dimensional rendering context.
+-   `projection` **d3.geoMollweide** the instructions for how to draw the points for either galactic or equatorial coordinate systems.<p> Each time the map is redrawn, a new instance of this function is created, called mydraw. the context remains the same, but the projection changes based on coordinate system and level of zoom
+
 #### skymap
 
 Defines drawing function and draws the skymap
@@ -76,6 +88,14 @@ Defines drawing function and draws the skymap
 **Parameters**
 
 -   `stringout` **[array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** all filtered event data<p> format: (input format later)
+
+#### drawPoints
+
+Draws all of the data onto the skymap
+
+#### types
+
+Defines how to draw different types of data
 
 ## Processing
 
