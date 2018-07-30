@@ -5,11 +5,11 @@
 *<p> <b> Likelihood Graph: </b> 
 *<p> This graph displays the TS (test statistic), which is a quantification of the likelihood that ns neutrino events originated from the selected source,  for ns values between 0 and 10. In calculating the TS, spacial clustering of events, as well as their proximty to the source and their associated angular errors are taken into account. Generally, TS ≥ 25 is considered significant.
 *<p> The following equations are used to compute TS: 
-*<p> 
+*<p> https://i.imgur.com/UKcHX3z.png
 *<p> where ns = 0 is the null hypothesis that ns neutrino events correlate with the selected gamma-ray source, and is bounded between zero and N. S accounts for the event angular distribution. B is the background distribution which is assumed to be isotropic (1/4pi).N = # of neutrino events; M = # of sources in target catalog
 *<p> The output to this equation is the calculated probability that exactly ns neutrino events are associated with the target source. 
 *<p> The angular distribution of events takes the form of a 2-dimensional Kent distribution. This is the standard probability distribution for these events -- centered around the given coordinates, the true location of the source may lie anywhere in the surrounding region. This is why gamma-ray sources even in moderate proximity to neutrino events are of significance. 
-*<p>
+*<p> https://i.imgur.com/7TUEasI.png
 *<p> where L is our likelihood definition. Though our definition of TS is somewhat arbitrary, it serves to construct a scale where TS>25 can be considered statistically significant.
 *<p>
 *<p> <b> Proximity Visualization: </b>
